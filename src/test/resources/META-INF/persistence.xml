@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+    <persistence-unit name="Concurrent-PU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <class>fr.eni.concurrent.examples.jee.sql.AccountTransaction</class>
+        <class>fr.eni.concurrent.examples.jee.sql.UserAccount</class>
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:db1"/>
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="javax.persistence.jdbc.password" value="sa"/>
+            <property name="javax.persistence.jdbc.user" value="sa"/>
+            <property name="eclipselink.ddl-generation" value="create-tables"/>
+        </properties>
+    </persistence-unit>
+    <!--jdbc/embeddedDS-->
+    <persistence-unit name="Concurrent-JTA-PU" transaction-type="JTA">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <class>fr.eni.concurrent.examples.jee.sql.AccountTransaction</class>
+        <class>fr.eni.concurrent.examples.jee.sql.UserAccount</class>
+        <jta-data-source>jdbc/embeddedDS</jta-data-source>
+        </properties>
+    </persistence-unit>
+    
+</persistence>
